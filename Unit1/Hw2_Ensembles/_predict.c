@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <omp.h>
 int __new_predict(
     float *x, 
     int len, 
@@ -12,6 +13,8 @@ int __new_predict(
     float *predictions,
     int *leaf_indices)
 {
+    int i = 0;
+    int node_id = 0;
     for (int i = 0; i < len; ++i) {
         int node_id = 0;
         while (is_leafs[node_id] == 0) {
